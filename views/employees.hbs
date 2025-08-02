@@ -1,0 +1,97 @@
+<h1>Employees</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each employees.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{#each employees}}
+        <tr>
+            <td>{{this.employeeID}}</td>
+            <td>{{this.fName}}</td>
+            <td>{{this.lName}}</td>
+            <td>{{this.jobTitle}}</td>
+            <td>{{this.isDealer}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phoneNumber}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_employee_form'>
+                <input type='hidden' name='delete_employee_id' value='{{this.employeeID}}' />
+                <input type='hidden' name='delete_employee_name' value='{{this.fName}} {{this.lName}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create an Employee</h2>
+<form class='cuForm' id='create_employee_form'>
+    <label for='create_employee_fName'>First Name: </label>
+    <input type='text' name='create_employee_fName' id='create_employee_fName' required />
+
+    <label for='create_employee_lName'>Last Name: </label>
+    <input type='text' name='create_employee_lName' id='create_employee_lName' required/>
+
+    <label for='create_employee_jt'>jobTitle: </label>
+    <input type='text' name='create_employee_jt' id='create_employee_jt' required />
+
+    <label for='create_employee_dealer'>isDealer: </label>
+    <input type='text' name='create_employee_dealer' id='create_employee_dealer' required/>
+
+    <label for='create_employee_email'>email: </label>
+    <input type='email' name='create_employee_email' id='create_employee_email' required />
+
+    <label for='create_employee_number'>phoneNumber: </label>
+    <input type='number' name='create_employee_number' id='create_employee_number' required />
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Employee</h2>
+<form class='cuForm' id='update_employee_form'>
+    <label for='update_employee_id'>Employee to Update: </label>
+    <select name='update_employee_id' id='update_employee_id' required>
+        <option value='' disabled selected>Select a Employee</option>
+        {{#each employees}}
+        <option value='{{this.employeeID}}' required>
+            {{this.employeeID}}
+            -
+            {{this.fName}}
+            {{this.lName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_employee_jt'>Job Title: </label>
+    <input type='text' name='update_employee_jt' id='update_employee_jt' />
+
+    <label for='update_employee_dealer'>is Dealer: </label>
+    <input type='text' name='update_employee_dealer' id='update_employee_dealer' />
+
+    <label for='update_employee_email'>Email: </label>
+    <input type='email' name='update_employee_email' id='update_employee_email' />
+
+    <label for='update_employee_phone'>Phone Number: </label>
+    <input type='number' name='update_employee_phone' id='update_employee_phone' />
+
+    <input type='submit' />
+</form>

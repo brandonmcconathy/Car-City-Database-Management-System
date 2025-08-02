@@ -1,0 +1,95 @@
+<h1>Cars</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each cars.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{#each cars}}
+        <tr>
+            <td>{{this.carID}}</td>
+            <td>{{this.isPreOwned}}</td>
+            <td>{{this.receivedDate}}</td>
+            <td>{{this.isForSale}}</td>
+            <td>{{this.make}}</td>
+            <td>{{this.model}}</td>
+            <td>{{this.year}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_car_form'>
+                <input type='hidden' name='delete_car_id' value='{{this.carID}}' />
+                <input type='hidden' name='delete_car_name' value='{{this.year}} {{this.make}} {{this.model}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Car</h2>
+<form class='cuForm' id='create_car_form'>
+
+    <label for='create_car_model'>Car Model: </label>
+    <select name='create_car_model' id='create_car_model'>
+        <option value='NULL' selected>Select a Car Model</option>
+        {{#each models}}
+        <option value='{{this.carModelID}}' required>{{this.year}} {{this.make}} {{this.model}}</option>
+        {{/each}}
+    </select>
+
+    <label for='create_car_pre'>Is Pre Owned: </label>
+    <input type='text' name='create_car_pre' id='create_car_pre' required />
+
+    <label for='create_car_date'>Received Date: </label>
+    <input type='date' name='create_car_date' id='create_car_date' required/>
+
+    <label for='create_car_sale'>Is For Sale: </label>
+    <input type='text' name='create_car_sale' id='create_car_sale' required />
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Car</h2>
+<form class='cuForm' id='update_car_form'>
+    <label for='update_car_id'>Car to Update: </label>
+    <select name='update_car_id' id='update_car_id' required>
+        <option value='' disabled selected>Select a Car</option>
+        {{#each cars}}
+        <option value='{{this.carID}}' required>
+            {{this.carID}}
+            -
+            {{this.year}}
+            {{this.make}}
+            {{this.model}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_car_pre'>Is Pre Owned: </label>
+    <input type='text' name='update_car_pre' id='update_car_pre' />
+
+    <label for='update_car_date'>Received Date: </label>
+    <input type='text' name='update_car_date' id='update_car_date' />
+
+    <label for='update_car_sale'>Is For Sale: </label>
+    <input type='text' name='update_car_sale' id='update_car_sale' />
+
+    <input type='submit' />
+</form>

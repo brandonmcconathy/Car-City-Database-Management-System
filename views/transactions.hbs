@@ -1,0 +1,132 @@
+<h1>Transactions</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each transactions.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{#each transactions}}
+        <tr>
+            <td>{{this.transactionID}}</td>
+            <td>{{this.carID}}</td>
+            <td>{{this.year}}</td>
+            <td>{{this.make}}</td>
+            <td>{{this.model}}</td>
+            <td>{{this.eFName}}</td>
+            <td>{{this.eLName}}</td>
+            <td>{{this.cFName}}</td>
+            <td>{{this.cLName}}</td>
+            <td>{{this.transactionDate}}</td>
+            <td>{{this.transactionAmount}}</td>
+            <td>{{this.paid}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_transaction_form'>
+                <input type='hidden' name='delete_transaction_id' value='{{this.transactionID}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Transaction</h2>
+<form class='cuForm' id='create_transaction_form'>
+
+    <label for='create_car'>Car: </label>
+    <select name='create_car' id='create_car'>
+        <option value='NULL' selected>Select a Car</option>
+        {{#each cars}}
+        <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
+        {{/each}}
+    </select>
+
+    <label for='create_employee'>Employee: </label>
+    <select name='create_employee' id='create_employee'>
+        <option value='NULL' selected>Select an Employee</option>
+        {{#each employees}}
+        <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
+        {{/each}}
+    </select>
+
+    <label for='create_customer'>Customer: </label>
+    <select name='create_customer' id='create_customer'>
+        <option value='NULL' selected>Select a Customer</option>
+        {{#each customers}}
+        <option value='{{this.customerID}}' required>{{this.fName}} {{this.lName}}</option>
+        {{/each}}
+    </select>
+
+    <label for='create_transaction_date'>Transaction Date: </label>
+    <input type='date' name='create_transaction_date' id='create_transaction_date' required />
+
+    <label for='create_transaction_amount'>Transaction Amount: </label>
+    <input type='number' name='create_transaction_amount' id='create_transaction_amount' required/>
+
+    <label for='create_transaction_paid'>Paid: </label>
+    <input type='text' name='create_transaction_paid' id='create_transaction_paid' required />
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Transaction</h2>
+<form class='cuForm' id='update_transction_form'>
+    <label for='update_transction_id'>Transaction to Update: </label>
+    <select name='update_transction_id' id='update_transction_id' required>
+        <option value='' disabled selected>Select a Transaction</option>
+        {{#each transactions}}
+        <option value='{{this.transactionID}}' required>
+            {{this.transactionID}}
+            -
+            {{this.carID}}
+            {{this.year}}
+            {{this.make}}
+            {{this.model}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_employee'>Employee: </label>
+    <select name='update_employee' id='update_employee'>
+        <option value='NULL' selected>Select an Employee</option>
+        {{#each employees}}
+        <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
+        {{/each}}
+    </select>
+
+    <label for='update_customer'>Customer: </label>
+    <select name='update_customer' id='update_customer'>
+        <option value='NULL' selected>Select a Customer</option>
+        {{#each customers}}
+        <option value='{{this.customerID}}' required>{{this.fName}} {{this.lName}}</option>
+        {{/each}}
+    </select>
+
+    <label for='update_transaction_date'>Transaction Date: </label>
+    <input type='date' name='update_transaction_date' id='update_transaction_date' />
+
+    <label for='update_transaction_amount'>Transaction Amount: </label>
+    <input type='text' name='update_transaction_amount' id='update_transaction_amount' />
+
+    <label for='update_transaction_paid'>Paid: </label>
+    <input type='text' name='update_transaction_paid' id='update_transaction_paid' />
+
+    <input type='submit' />
+</form>
