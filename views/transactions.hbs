@@ -32,7 +32,7 @@
             <td>{{this.paid}}</td>
 
             {{! DELETE form }}
-            <form id='delete_transaction_form'>
+            <form id='delete_transaction_form' method="POST" action="transactions/delete">
                 <input type='hidden' name='delete_transaction_id' value='{{this.transactionID}}' />
                 <td>
                     <button type='submit'>

@@ -31,7 +31,7 @@
             <td>{{this.cost}}</td>
 
             {{! DELETE form }}
-            <form id='delete_repair_form'>
+            <form id='delete_repair_form' method="POST" action="repairs/delete">
                 <input type='hidden' name='delete_repair_id' value='{{this.repairID}}' />
                 <td>
                     <button type='submit'>

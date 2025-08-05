@@ -24,7 +24,7 @@
             <td>{{this.year}}</td>
 
             {{! DELETE form }}
-            <form id='delete_model_form'>
+            <form id='delete_model_form' method="POST" action="car-models/delete">
                 <input type='hidden' name='delete_model_id' value='{{this.carModelID}}' />
                 <input type='hidden' name='delete_model_name' value='{{this.year}} {{this.make}} {{this.model}}' />
                 <td>

@@ -1,4 +1,6 @@
--- Database Manipulation Queries
+-- Group 12, Car City Sales Management System
+-- Lindsey Clement & Brandon Mcconathy
+-- All work is our own. No AI tools were used.
 
 -- Select all customers and contact info from the Customers entity
 SELECT CONCAT(fName,' ',lName) AS name, phoneNumber, email

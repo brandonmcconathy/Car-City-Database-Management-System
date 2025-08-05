@@ -1,3 +1,13 @@
+-- Group 12, Car City Sales Management System
+-- Lindsey Clement & Brandon Mcconathy
+-- All work is our own. No AI tools were used.
+
+-- #############################
+-- #############################
+-- CREATE Procedures
+-- #############################
+-- #############################
+
 -- #############################
 -- CREATE Customers
 -- #############################
@@ -149,6 +159,198 @@ BEGIN
     SELECT LAST_INSERT_ID() into p_id;
     -- Display the ID.
     SELECT LAST_INSERT_ID() AS 'new_id';
+
+END //
+DELIMITER ;
+
+-- #############################
+-- #############################
+-- DELETE Procedures
+-- #############################
+-- #############################
+
+-- #############################
+-- DELETE Customer
+-- #############################
+DROP PROCEDURE IF EXISTS sp_DeleteCustomer;
+
+DELIMITER //
+CREATE PROCEDURE sp_DeleteCustomer(IN p_id INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- error handling
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM Transactions WHERE customerID = p_id;
+        DELETE FROM Customers WHERE customerID = p_id;
+
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in Customers for id: ', p_id);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
+
+END //
+DELIMITER ;
+
+-- #############################
+-- DELETE Employee
+-- #############################
+DROP PROCEDURE IF EXISTS sp_DeleteEmployee;
+
+DELIMITER //
+CREATE PROCEDURE sp_DeleteEmployee(IN p_id INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- error handling
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM Transactions WHERE EmployeeID = p_id;
+        DELETE FROM Repairs WHERE EmployeeID = p_id;
+        DELETE FROM Employees WHERE EmployeeID = p_id;
+
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in Employees for id: ', p_id);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
+
+END //
+DELIMITER ;
+
+-- #############################
+-- DELETE Car Model
+-- #############################
+DROP PROCEDURE IF EXISTS sp_DeleteCarModel;
+
+DELIMITER //
+CREATE PROCEDURE sp_DeleteCarModel(IN p_id INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- error handling
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM Cars WHERE carModelID = p_id;
+        DELETE FROM CarModel WHERE carModelID = p_id;
+
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in CarModel for id: ', p_id);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
+
+END //
+DELIMITER ;
+
+-- #############################
+-- DELETE Car
+-- #############################
+DROP PROCEDURE IF EXISTS sp_DeleteCar;
+
+DELIMITER //
+CREATE PROCEDURE sp_DeleteCar(IN p_id INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- error handling
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM Transactions WHERE carID = p_id;
+        DELETE FROM Repairs WHERE carID = p_id;
+        DELETE FROM Cars WHERE carID = p_id;
+
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in Cars for id: ', p_id);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
+
+END //
+DELIMITER ;
+
+-- #############################
+-- DELETE Repair
+-- #############################
+DROP PROCEDURE IF EXISTS sp_DeleteRepair;
+
+DELIMITER //
+CREATE PROCEDURE sp_DeleteRepair(IN p_id INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- error handling
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM Repairs WHERE repairID = p_id;
+
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in Repairs for id: ', p_id);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
+
+END //
+DELIMITER ;
+
+-- #############################
+-- DELETE Transaction
+-- #############################
+DROP PROCEDURE IF EXISTS sp_DeleteTransaction;
+
+DELIMITER //
+CREATE PROCEDURE sp_DeleteTransaction(IN p_id INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- error handling
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM Transactions WHERE transactionID = p_id;
+
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in Transactions for id: ', p_id);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
 
 END //
 DELIMITER ;

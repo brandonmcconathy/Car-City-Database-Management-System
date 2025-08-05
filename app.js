@@ -250,6 +250,7 @@ app.post('/car-models/create', async function (req, res) {
     }
 });
 
+// Create Car
 app.post('/cars/create', async function (req, res) {
     try {
         // Parse frontend form information
@@ -275,6 +276,7 @@ app.post('/cars/create', async function (req, res) {
     }
 });
 
+// Create Repair
 app.post('/repairs/create', async function (req, res) {
     try {
         // Parse frontend form information
@@ -302,6 +304,7 @@ app.post('/repairs/create', async function (req, res) {
     }
 });
 
+// Create Transaction
 app.post('/transactions/create', async function (req, res) {
     try {
         // Parse frontend form information
@@ -332,6 +335,123 @@ app.post('/transactions/create', async function (req, res) {
 // UPDATE ROUTES
 
 // DELETE ROUTES
+
+// Delete Customer
+app.post('/customers/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        // Create and execute our query
+        // Using parameterized queries (Prevents SQL injection attacks)
+        const query1 = `CALL sp_DeleteCustomer(?);`;
+        await db.query(query1, [data.delete_customer_id]);
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/customers');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Delete Employee
+app.post('/employees/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        const query1 = `CALL sp_DeleteEmployee(?);`;
+        await db.query(query1, [data.delete_employee_id]);
+        res.redirect('/employees');
+
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Delete Car Model
+app.post('/car-models/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        const query1 = `CALL sp_DeleteCarModel(?);`;
+        await db.query(query1, [data.delete_model_id]);
+        res.redirect('/car-models');
+        
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Delete Car
+app.post('/cars/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        const query1 = `CALL sp_DeleteCar(?);`;
+        await db.query(query1, [data.delete_car_id]);
+        res.redirect('/cars');
+        
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Delete Repair
+app.post('/repairs/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        const query1 = `CALL sp_DeleteRepair(?);`;
+        await db.query(query1, [data.delete_repair_id]);
+        res.redirect('/repairs');
+        
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Delete Transaction
+app.post('/transactions/delete', async function (req, res) {
+    try {
+        // Parse frontend form information
+        let data = req.body;
+
+        const query1 = `CALL sp_DeleteTransaction(?);`;
+        await db.query(query1, [data.delete_transaction_id]);
+        res.redirect('/transactions');
+        
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
 
 // ########################################
 // ########## LISTENER
