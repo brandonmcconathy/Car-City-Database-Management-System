@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! Print each row }}
         {{#each transactions}}
         <tr>
             <td>{{this.transactionID}}</td>
@@ -47,27 +47,27 @@
 
 {{! CREATE form }}
 <h2>Create a Transaction</h2>
-<form class='cuForm' id='create_transaction_form'>
+<form class='cuForm' id='create_transaction_form' method="POST" action="/transactions/create">
 
-    <label for='create_car'>Car: </label>
-    <select name='create_car' id='create_car'>
-        <option value='NULL' selected>Select a Car</option>
+    <label for='create_transaction_car'>Car: </label>
+    <select name='create_transaction_car' id='create_transaction_car'>
+        <option value='NULL' disabled selected>Select a Car</option>
         {{#each cars}}
         <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
         {{/each}}
     </select>
 
-    <label for='create_employee'>Employee: </label>
-    <select name='create_employee' id='create_employee'>
-        <option value='NULL' selected>Select an Employee</option>
+    <label for='create_transaction_employee'>Employee: </label>
+    <select name='create_transaction_employee' id='create_transaction_employee'>
+        <option value='NULL' disabled selected>Select an Employee</option>
         {{#each employees}}
         <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
         {{/each}}
     </select>
 
-    <label for='create_customer'>Customer: </label>
-    <select name='create_customer' id='create_customer'>
-        <option value='NULL' selected>Select a Customer</option>
+    <label for='create_transaction_customer'>Customer: </label>
+    <select name='create_transaction_customer' id='create_transaction_customer'>
+        <option value='NULL' disabled selected>Select a Customer</option>
         {{#each customers}}
         <option value='{{this.customerID}}' required>{{this.fName}} {{this.lName}}</option>
         {{/each}}

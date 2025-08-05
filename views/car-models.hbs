@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! Print each row }}
         {{#each models}}
         <tr>
             <td>{{this.carModelID}}</td>
@@ -40,7 +40,7 @@
 
 {{! CREATE form }}
 <h2>Create a Car Model</h2>
-<form class='cuForm' id='create_model_form'>
+<form class='cuForm' id='create_model_form' method="POST" action="/car-models/create">
     <label for='create_model_make'>Make: </label>
     <input type='text' name='create_model_make' id='create_model_make' required />
 

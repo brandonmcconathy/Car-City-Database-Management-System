@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! Print each row }}
         {{#each repairs}}
         <tr>
             <td>{{this.repairID}}</td>
@@ -46,19 +46,19 @@
 
 {{! CREATE form }}
 <h2>Create a Repair</h2>
-<form class='cuForm' id='create_repair_form'>
+<form class='cuForm' id='create_repair_form' method="POST" action="/repairs/create">
 
-    <label for='create_car'>Car: </label>
-    <select name='create_car' id='create_car'>
-        <option value='NULL' selected>Select a Car</option>
+    <label for='create_repair_car'>Car: </label>
+    <select name='create_repair_car' id='create_repair_car'>
+        <option value='NULL' disabled selected>Select a Car</option>
         {{#each cars}}
         <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
         {{/each}}
     </select>
 
-    <label for='create_employee'>Employee: </label>
-    <select name='create_employee' id='create_employee'>
-        <option value='NULL' selected>Select a Employee</option>
+    <label for='create_repair_employee'>Employee: </label>
+    <select name='create_repair_employee' id='create_repair_employee'>
+        <option value='NULL' disabled selected>Select an Employee</option>
         {{#each employees}}
         <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
         {{/each}}

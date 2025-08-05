@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! Print each row }}
         {{#each customers}}
         <tr>
             <td>{{this.customerID}}</td>
@@ -47,12 +47,12 @@
 
 {{! CREATE form }}
 <h2>Create a Customer</h2>
-<form class='cuForm' id='create_customer_form'>
-    <label for='create_customer_fName'>First Name: </label>
-    <input type='text' name='create_customer_fName' id='create_customer_fName' required />
+<form class='cuForm' id='create_customer_form' method="POST" action="/customers/create">
+    <label for='create_customer_fname'>First Name: </label>
+    <input type='text' name='create_customer_fname' id='create_customer_fname' required />
 
-    <label for='create_customer_lName'>Last Name: </label>
-    <input type='text' name='create_customer_lName' id='create_customer_lName' />
+    <label for='create_customer_lname'>Last Name: </label>
+    <input type='text' name='create_customer_lname' id='create_customer_lname' />
 
     <label for='create_customer_ad1'>Address Line 1: </label>
     <input type='text' name='create_customer_ad1' id='create_customer_ad1' required />

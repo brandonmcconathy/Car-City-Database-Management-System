@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! Print each row }}
         {{#each employees}}
         <tr>
             <td>{{this.employeeID}}</td>
@@ -43,12 +43,12 @@
 
 {{! CREATE form }}
 <h2>Create an Employee</h2>
-<form class='cuForm' id='create_employee_form'>
-    <label for='create_employee_fName'>First Name: </label>
-    <input type='text' name='create_employee_fName' id='create_employee_fName' required />
+<form class='cuForm' id='create_employee_form' method="POST" action="/employees/create">
+    <label for='create_employee_fname'>First Name: </label>
+    <input type='text' name='create_employee_fname' id='create_employee_fname' required />
 
-    <label for='create_employee_lName'>Last Name: </label>
-    <input type='text' name='create_employee_lName' id='create_employee_lName' required/>
+    <label for='create_employee_lname'>Last Name: </label>
+    <input type='text' name='create_employee_lname' id='create_employee_lname' required/>
 
     <label for='create_employee_jt'>jobTitle: </label>
     <input type='text' name='create_employee_jt' id='create_employee_jt' required />

@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! Print each row }}
         {{#each cars}}
         <tr>
             <td>{{this.carID}}</td>
@@ -43,11 +43,11 @@
 
 {{! CREATE form }}
 <h2>Create a Car</h2>
-<form class='cuForm' id='create_car_form'>
+<form class='cuForm' id='create_car_form' method="POST" action="/cars/create">
 
     <label for='create_car_model'>Car Model: </label>
     <select name='create_car_model' id='create_car_model'>
-        <option value='NULL' selected>Select a Car Model</option>
+        <option value='NULL' disabled selected>Select a Car Model</option>
         {{#each models}}
         <option value='{{this.carModelID}}' required>{{this.year}} {{this.make}} {{this.model}}</option>
         {{/each}}
