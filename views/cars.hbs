@@ -67,7 +67,7 @@
 
 {{! UPDATE form }}
 <h2>Update a Car</h2>
-<form class='cuForm' id='update_car_form'>
+<form class='cuForm' id='update_car_form' method="POST" action="/cars/update">
     <label for='update_car_id'>Car to Update: </label>
     <select name='update_car_id' id='update_car_id' required>
         <option value='' disabled selected>Select a Car</option>
@@ -82,11 +82,18 @@
         {{/each}}
     </select>
 
+    <select name='update_car_model' id='update_car_model'>
+        <option value='NULL' disabled selected>Select a Car Model</option>
+        {{#each models}}
+        <option value='{{this.carModelID}}' required>{{this.year}} {{this.make}} {{this.model}}</option>
+        {{/each}}
+    </select>
+
     <label for='update_car_pre'>Is Pre Owned: </label>
     <input type='text' name='update_car_pre' id='update_car_pre' />
 
     <label for='update_car_date'>Received Date: </label>
-    <input type='text' name='update_car_date' id='update_car_date' />
+    <input type='date' name='update_car_date' id='update_car_date' />
 
     <label for='update_car_sale'>Is For Sale: </label>
     <input type='text' name='update_car_sale' id='update_car_sale' />

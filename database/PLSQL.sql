@@ -96,7 +96,7 @@ DELIMITER //
 CREATE PROCEDURE sp_CreateCar(
     IN p_carModelID INT, 
     IN p_isPreOwned TINYINT,
-    IN p_receivedDate TINYINT,
+    IN p_receivedDate DATETIME,
     IN p_isForSale TINYINT,
     OUT p_id INT)
 BEGIN
@@ -352,5 +352,177 @@ BEGIN
 
     COMMIT;
 
+END //
+DELIMITER ;
+
+-- #############################
+-- #############################
+-- UPDATE Procedures
+-- #############################
+-- #############################
+
+-- #############################
+-- UPDATE Customers
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateCustomer;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateCustomer(
+    IN p_customerID INT,
+    IN p_fName VARCHAR(100), 
+    IN p_lName VARCHAR(100), 
+    IN p_addressLine1 VARCHAR(150), 
+    IN p_addressLine2 VARCHAR(150), 
+    IN p_city VARCHAR(100), 
+    IN p_state VARCHAR(20),
+    IN p_country VARCHAR(50),
+    IN p_postalCode VARCHAR(50),
+    IN p_phoneNumber VARCHAR(20),
+    IN p_email VARCHAR(254)
+    )
+
+BEGIN
+    UPDATE Customers SET 
+    fName = p_fName, 
+    lName = p_lName, 
+    addressLine1 = p_addressLine1, 
+    addressLine2 = p_addressLine2, 
+    city = p_city, 
+    state = p_state,
+    country = p_country,
+    postalCode = p_postalCode,
+    phoneNumber = p_phoneNumber,
+    email = p_email
+    WHERE customerID = p_customerID; 
+END //
+DELIMITER ;
+
+-- #############################
+-- UPDATE Employees
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateEmployee;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateEmployee(
+    IN p_employeeID INT,
+    IN p_fName VARCHAR(100), 
+    IN p_lName VARCHAR(100), 
+    IN p_jobTitle VARCHAR(50), 
+    IN p_isDealer TINYINT, 
+    IN p_email VARCHAR(254), 
+    IN p_phoneNumber VARCHAR(20)
+    )
+
+BEGIN
+    UPDATE Employees SET 
+    fName = p_fName, 
+    lName = p_lName, 
+    jobTitle = p_jobTitle, 
+    isDealer = p_isDealer, 
+    email = p_email, 
+    phoneNumber = p_phoneNumber
+    WHERE employeeID = p_employeeID; 
+END //
+DELIMITER ;
+
+-- #############################
+-- UPDATE Car Models
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateCarModel;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateCarModel(
+    IN p_carModelID INT,
+    IN p_make VARCHAR(50), 
+    IN p_model VARCHAR(50),
+    IN p_year INT
+    )
+
+BEGIN
+    UPDATE CarModel SET 
+    make = p_make, 
+    model = p_model, 
+    year = p_year
+    WHERE carModelID = p_carModelID; 
+END //
+DELIMITER ;
+
+-- #############################
+-- UPDATE Cars
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateCar;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateCar(
+    IN p_carID INT,
+    IN p_carModelID INT, 
+    IN p_isPreOwned TINYINT,
+    IN p_receivedDate DATETIME,
+    IN p_isForSale TINYINT
+    )
+
+BEGIN
+    UPDATE Cars SET 
+    carModelID = p_carModelID, 
+    isPreOwned = p_isPreOwned, 
+    receivedDate = p_receivedDate,
+    isForSale = p_isForSale
+    WHERE carID = p_carID; 
+END //
+DELIMITER ;
+
+-- #############################
+-- UPDATE Repairs
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateRepair;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateRepair(
+    IN p_repairID INT,
+    IN p_employeeID INT,
+    IN p_carID INT, 
+    IN p_serviceDate DATETIME, 
+    IN p_serviceType VARCHAR(100), 
+    IN p_notes VARCHAR(255), 
+    IN p_cost DECIMAL(10,2)
+    )
+
+BEGIN
+    UPDATE Repairs SET 
+    employeeID = p_employeeID, 
+    carID = p_carID, 
+    serviceDate = p_serviceDate,
+    serviceType = p_serviceType,
+    notes = p_notes,
+    cost = p_cost
+    WHERE repairID = p_repairID; 
+END //
+DELIMITER ;
+
+-- #############################
+-- UPDATE Transactions
+-- #############################
+DROP PROCEDURE IF EXISTS sp_UpdateTransaction;
+
+DELIMITER //
+CREATE PROCEDURE sp_UpdateTransaction(
+    IN p_transactionID INT,
+    IN p_customerID INT,
+    IN p_employeeID INT,
+    IN p_carID INT, 
+    IN p_transactionDate DATETIME, 
+    IN p_transactionAmount DECIMAL(10,2),
+    IN p_paid TINYINT
+    )
+
+BEGIN
+    UPDATE Transactions SET 
+    customerID = p_customerID, 
+    employeeID = p_employeeID, 
+    carID = p_carID, 
+    transactionDate = p_transactionDate,
+    transactionAmount = p_transactionAmount,
+    paid = p_paid
+    WHERE transactionID = p_transactionID; 
 END //
 DELIMITER ;

@@ -66,8 +66,8 @@
 </form>
 
 {{! UPDATE form }}
-<h2>Update a Employee</h2>
-<form class='cuForm' id='update_employee_form'>
+<h2>Update an Employee</h2>
+<form class='cuForm' id='update_employee_form' method="POST" action="/employees/update">
     <label for='update_employee_id'>Employee to Update: </label>
     <select name='update_employee_id' id='update_employee_id' required>
         <option value='' disabled selected>Select a Employee</option>
@@ -81,6 +81,12 @@
         {{/each}}
     </select>
 
+    <label for='update_employee_fname'>First Name: </label>
+    <input type='text' name='update_employee_fname' id='update_employee_fname' />
+
+    <label for='update_employee_lname'>Last Name: </label>
+    <input type='text' name='update_employee_lname' id='update_employee_lname' />
+
     <label for='update_employee_jt'>Job Title: </label>
     <input type='text' name='update_employee_jt' id='update_employee_jt' />
 
@@ -90,8 +96,8 @@
     <label for='update_employee_email'>Email: </label>
     <input type='email' name='update_employee_email' id='update_employee_email' />
 
-    <label for='update_employee_phone'>Phone Number: </label>
-    <input type='number' name='update_employee_phone' id='update_employee_phone' />
+    <label for='update_employee_number'>Phone Number: </label>
+    <input type='number' name='update_employee_number' id='update_employee_number' />
 
     <input type='submit' />
 </form>

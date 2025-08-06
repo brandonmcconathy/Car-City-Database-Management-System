@@ -87,9 +87,9 @@
 
 {{! UPDATE form }}
 <h2>Update a Transaction</h2>
-<form class='cuForm' id='update_transction_form'>
-    <label for='update_transction_id'>Transaction to Update: </label>
-    <select name='update_transction_id' id='update_transction_id' required>
+<form class='cuForm' id='update_transction_form' method="POST" action="/transactions/update">
+    <label for='update_transaction_id'>Transaction to Update: </label>
+    <select name='update_transaction_id' id='update_transaction_id' required>
         <option value='' disabled selected>Select a Transaction</option>
         {{#each transactions}}
         <option value='{{this.transactionID}}' required>
@@ -103,16 +103,24 @@
         {{/each}}
     </select>
 
-    <label for='update_employee'>Employee: </label>
-    <select name='update_employee' id='update_employee'>
+    <label for='update_transaction_car'>Car: </label>
+    <select name='update_transaction_car' id='update_transaction_car'>
+        <option value='NULL' disabled selected>Select a Car</option>
+        {{#each cars}}
+        <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
+        {{/each}}
+    </select>
+
+    <label for='update_transaction_employee'>Employee: </label>
+    <select name='update_transaction_employee' id='update_transaction_employee'>
         <option value='NULL' selected>Select an Employee</option>
         {{#each employees}}
         <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
         {{/each}}
     </select>
 
-    <label for='update_customer'>Customer: </label>
-    <select name='update_customer' id='update_customer'>
+    <label for='update_transaction_customer'>Customer: </label>
+    <select name='update_transaction_customer' id='update_transaction_customer'>
         <option value='NULL' selected>Select a Customer</option>
         {{#each customers}}
         <option value='{{this.customerID}}' required>{{this.fName}} {{this.lName}}</option>

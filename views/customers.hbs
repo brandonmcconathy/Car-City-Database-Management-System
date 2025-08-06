@@ -83,7 +83,7 @@
 
 {{! UPDATE form }}
 <h2>Update a Customer</h2>
-<form class='cuForm' id='update_customer_form'>
+<form class='cuForm' id='update_customer_form' method="POST" action="/customers/update">
     <label for='update_customer_id'>Customer to Update: </label>
     <select name='update_customer_id' id='update_customer_id' required>
         <option value='' disabled selected>Select a Customer</option>
@@ -96,6 +96,12 @@
         </option>
         {{/each}}
     </select>
+
+    <label for='update_customer_fname'>First Name: </label>
+    <input type='text' name='update_customer_fname' id='update_customer_fname' />
+
+    <label for='update_customer_lname'>Last Name: </label>
+    <input type='text' name='update_customer_lname' id='update_customer_lname' />
 
     <label for='update_customer_ad1'>Address Line 1: </label>
     <input type='text' name='update_customer_ad1' id='update_customer_ad1' />

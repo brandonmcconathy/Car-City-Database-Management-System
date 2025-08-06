@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const PORT = 6285;
+const PORT = 6286;
 
 // Database
 const db = require('./database/db-connector');
@@ -211,7 +211,7 @@ app.post('/employees/create', async function (req, res) {
             data.create_employee_jt,
             data.create_employee_dealer,
             data.create_employee_email,
-            data.create_employee_number,
+            data.create_employee_number
         ]);
 
         // Redirect the user to the updated webpage
@@ -236,7 +236,7 @@ app.post('/car-models/create', async function (req, res) {
         await db.query(query1, [
             data.create_model_make,
             data.create_model_model,
-            data.create_model_year,
+            data.create_model_year
         ]);
 
         // Redirect the user to the updated webpage
@@ -318,7 +318,7 @@ app.post('/transactions/create', async function (req, res) {
             data.create_transaction_car,
             data.create_transaction_date,
             data.create_transaction_amount,
-            data.create_transaction_paid,
+            data.create_transaction_paid
         ]);
 
         // Redirect the user to the updated webpage
@@ -331,8 +331,6 @@ app.post('/transactions/create', async function (req, res) {
         );
     }
 });
-
-// UPDATE ROUTES
 
 // DELETE ROUTES
 
@@ -444,6 +442,175 @@ app.post('/transactions/delete', async function (req, res) {
         await db.query(query1, [data.delete_transaction_id]);
         res.redirect('/transactions');
         
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// UPDATE ROUTES
+
+// Update Customer
+app.post('/customers/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
+
+        // Create and execute our queries
+        const query1 = `CALL sp_UpdateCustomer(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+        await db.query(query1, [
+            data.update_customer_id,
+            data.update_customer_fname,
+            data.update_customer_lname,
+            data.update_customer_ad1,
+            data.update_customer_ad2,
+            data.update_customer_city,
+            data.update_customer_state,
+            data.update_customer_country,
+            data.update_customer_postalcode,
+            data.update_customer_number,
+            data.update_customer_email
+        ]);
+        res.redirect('/customers');
+
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Update Employee
+app.post('/employees/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
+
+        // Create and execute our queries
+        const query1 = `CALL sp_UpdateEmployee(?, ?, ?, ?, ?, ?, ?);`;
+        await db.query(query1, [
+            data.update_employee_id,
+            data.update_employee_fname,
+            data.update_employee_lname,
+            data.update_employee_jt,
+            data.update_employee_dealer,
+            data.update_employee_email,
+            data.update_employee_number
+        ]);
+        res.redirect('/employees');
+
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Update Car Model
+app.post('/car-models/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
+
+        // Create and execute our queries
+        const query1 = `CALL sp_UpdateCarModel(?, ?, ?, ?);`;
+        await db.query(query1, [
+            data.update_model_id,
+            data.update_model_make,
+            data.update_model_model,
+            data.update_model_year
+        ]);
+        res.redirect('/car-models');
+
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Update Cars
+app.post('/cars/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
+
+        // Create and execute our queries
+        const query1 = `CALL sp_UpdateCar(?, ?, ?, ?, ?);`;
+        await db.query(query1, [
+            data.update_car_id,
+            data.update_car_model,
+            data.update_car_pre,
+            data.update_car_date,
+            data.update_car_sale
+        ]);
+        res.redirect('/cars');
+
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Update Repairs
+app.post('/repairs/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
+
+        // Create and execute our queries
+        const query1 = `CALL sp_UpdateRepair(?, ?, ?, ?, ?, ?, ?);`;
+        await db.query(query1, [
+            data.update_repair_id,
+            data.update_repair_employee,
+            data.update_repair_car,
+            data.update_repair_date,
+            data.update_repair_type,
+            data.update_repair_notes,
+            data.update_repair_cost
+        ]);
+        res.redirect('/repairs');
+
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
+// Update Transactions
+app.post('/transactions/update', async function (req, res) {
+    try {
+        // Parse frontend form information
+        const data = req.body;
+
+        // Create and execute our queries
+        const query1 = `CALL sp_UpdateTransaction(?, ?, ?, ?, ?, ?, ?);`;
+        await db.query(query1, [
+            data.update_transaction_id,
+            data.update_transaction_customer,
+            data.update_transaction_employee,
+            data.update_transaction_car,
+            data.update_transaction_date,
+            data.update_transaction_amount,
+            data.update_transaction_paid
+        ]);
+        res.redirect('/transactions');
+
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
