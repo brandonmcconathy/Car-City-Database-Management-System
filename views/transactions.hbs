@@ -36,7 +36,7 @@
                 <td>{{this.cLName}}</td>
                 <td>{{this.transactionDate}}</td>
                 <td>{{this.transactionAmount}}</td>
-                <td>{{this.paid}}</td>
+                <td>{{boolToString this.paid}}</td>
     
                 {{! DELETE form }}
                 <form id='delete_transaction_form' method="POST" action="transactions/delete">
