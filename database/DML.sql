@@ -2,38 +2,62 @@
 -- Lindsey Clement & Brandon Mcconathy
 -- All work is our own. No AI tools were used.
 
--- Select all customers and contact info from the Customers entity
-SELECT CONCAT(fName,' ',lName) AS name, phoneNumber, email
-FROM Customers;
+-- Customers Page
+-- Select all customers from Customers table.
+-- This displays all customers when visiting customers page.
+SELECT * FROM Customers;
 
--- Select all employees and job title from Employees entity
-SELECT CONCAT(fName,' ',lName) AS name, jobTitle
-FROM Employees;
+-- Employees Page
+-- Select all employees from Employees table.
+-- This displays all employees when visiting employees page.
+SELECT * FROM Employees;
 
--- Select all cars that are for sale
-SELECT CarModel.year, CarModel.make, CarModel.model
-FROM Cars
-INNER JOIN CarModel ON Cars.CarModelID = CarModel.CarModelID
-WHERE Cars.isForSale;
+-- Car Models Page
+-- Select all car models from CarModel table.
+-- This displays all car models when visiting car models page.
+SELECT * FROM CarModel;
 
--- Select all repairs that cost more than 100
-SELECT Repairs.serviceType, Repairs.cost,
-    CONCAT(CarModel.year,' ',CarModel.make,' ',CarModel.model) as carModel,
-    CONCAT(Employees.fName,' ',Employees.lName) AS employee
-FROM Repairs
-INNER JOIN Employees ON Repairs.employeeID = Employees.employeeID
-INNER JOIN Cars on Repairs.carID = Cars.carID
-INNER JOIN CarModel on Cars.carModelID = CarModel.carModelID
-WHERE Repairs.cost > 100;
+-- Cars Page
+-- Select all cars from the Cars table with the car model joined.
+-- This displays all cars when visiting cars page.
+SELECT Cars.carID, Cars.isPreOwned, Cars.receivedDate, 
+    Cars.isForSale, CarModel.make, CarModel.model, CarModel.year
+FROM Cars INNER JOIN CarModel ON Cars.CarModelID = CarModel.CarModelID;
+-- Selects all car models for the dropdowns on update and create
+SELECT * FROM CarModel;
 
-
--- Select all transactions that have been paid
-SELECT CONCAT(CarModel.year,' ',CarModel.make,' ',CarModel.model) as carModel,
-    CONCAT(Employees.fName,' ',Employees.lName) AS employee, 
-    CONCAT(Customers.fName,' ',Customers.lName) AS customer, Transactions.transactionAmount
-FROM Transactions
-INNER JOIN Employees ON Transactions.employeeID = Employees.employeeID
-INNER JOIN Customers ON Transactions.customerID = Customers.customerID
-INNER JOIN Cars ON Transactions.carID = Cars.carID
+-- Repairs Page
+-- Select all repairs from the Repairs table. Joins the car models and employees.
+-- This displays all of the repairs when visiting the repairs page.
+SELECT Repairs.repairID, Repairs.carID, CarModel.year, CarModel.make, 
+    CarModel.model, Employees.fName, Employees.lName, Repairs.serviceDate, 
+    Repairs.serviceType, Repairs.notes, Repairs.cost 
+FROM Repairs INNER JOIN Cars ON Repairs.CarID = Cars.CarID 
 INNER JOIN CarModel ON Cars.carModelID = CarModel.carModelID
-WHERE Transactions.paid;
+INNER JOIN Employees ON Repairs.employeeID = Employees.employeeID;
+-- Selects all employees for the dropdowns on update and create
+SELECT * FROM Employees;
+-- Joins car models to the cars table for use in dropdowns on update and create
+SELECT Cars.carID, Cars.isPreOwned, Cars.receivedDate, 
+    Cars.isForSale, CarModel.make, CarModel.model, CarModel.year 
+FROM Cars INNER JOIN CarModel ON Cars.CarModelID = CarModel.CarModelID;
+
+-- Transactions Page
+-- Select all transactions from the Transactions table. Joins the car models, employees, and customers.
+-- This displays all of the transactions when visiting the transactions page.
+SELECT Transactions.transactionID, Transactions.carID, CarModel.year, CarModel.make, 
+    CarModel.model, Employees.fName AS eFName, Employees.lName AS eLName, 
+    Customers.fName AS cFName, Customers.lName AS cLName, Transactions.transactionDate, 
+    Transactions.transactionAmount, Transactions.paid 
+FROM Transactions INNER JOIN Cars ON Transactions.CarID = Cars.CarID 
+INNER JOIN CarModel ON Cars.carModelID = CarModel.carModelID
+INNER JOIN Employees ON Transactions.employeeID = Employees.employeeID
+INNER JOIN Customers ON Transactions.customerID = Customers.customerID;
+-- Selects all employees for use in dropdowns on update and create
+SELECT * FROM Employees;
+-- Selects all customers for use in dropdowns on update and create
+SELECT * FROM Customers
+-- Joins car models to the cars table for use in dropdowns on update and create
+SELECT Cars.carID, Cars.isPreOwned, Cars.receivedDate, \
+    Cars.isForSale, CarModel.make, CarModel.model, CarModel.year \
+FROM Cars INNER JOIN CarModel ON Cars.CarModelID = CarModel.CarModelID;
