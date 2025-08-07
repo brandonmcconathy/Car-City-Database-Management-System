@@ -27,7 +27,7 @@
                 <td>{{this.jobTitle}}</td>
                 <td>{{boolToString this.isDealer}}</td>
                 <td>{{this.email}}</td>
-                <td>{{this.phoneNumber}}</td>
+                <td>{{formatPhone this.phoneNumber}}</td>
     
                 {{! DELETE form }}
                 <form id='delete_employee_form' method="POST" action="employees/delete">
