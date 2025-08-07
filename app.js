@@ -10,6 +10,9 @@ app.use(express.static('public'));
 
 const PORT = 6285;
 
+// Style
+app.use(express.static('public'));
+
 // Database
 const db = require('./database/db-connector');
 

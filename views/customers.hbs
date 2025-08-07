@@ -1,131 +1,139 @@
-<h1>Customers</h1>
+<div class = "customers-page">
+    <h1>Customers</h1>
+    
+    {{! READ table }}
+    <table>
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address Line 1</th>
+                <th>Address Line 2</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Postal Code</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-{{! READ table }}
-<table>
-    <thead>
-        {{! For the table header row, we print the DB attribute names }}
-        <tr>
-            {{#each customers.[0]}}
-            <th>
-                {{@key}}
-            </th>
+    
+        <tbody>
+            {{! Print each row }}
+            {{#each customers}}
+            <tr>
+                <td>{{this.customerID}}</td>
+                <td>{{this.fName}}</td>
+                <td>{{this.lName}}</td>
+                <td>{{this.addressLine1}}</td>
+                <td>{{this.addressLine2}}</td>
+                <td>{{this.city}}</td>
+                <td>{{this.state}}</td>
+                <td>{{this.country}}</td>
+                <td>{{this.postalCode}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.phoneNumber}}</td>
+    
+                {{! DELETE form }}
+                <form id='delete_customer_form' method="POST" action="customers/delete">
+                    <input type='hidden' name='delete_customer_id' value='{{this.customerID}}' />
+                    <input type='hidden' name='delete_customer_name' value='{{this.fName}} {{this.lName}}' />
+                    <td>
+                        <button type='submit'>
+                            Delete
+                        </button>
+                    </td>
+                </form>
+            </tr>
             {{/each}}
-            <th></th>
-        </tr>
-    </thead>
-
-    <tbody>
-        {{! Print each row }}
-        {{#each customers}}
-        <tr>
-            <td>{{this.customerID}}</td>
-            <td>{{this.fName}}</td>
-            <td>{{this.lName}}</td>
-            <td>{{this.addressLine1}}</td>
-            <td>{{this.addressLine2}}</td>
-            <td>{{this.city}}</td>
-            <td>{{this.state}}</td>
-            <td>{{this.country}}</td>
-            <td>{{this.postalCode}}</td>
-            <td>{{this.phoneNumber}}</td>
-            <td>{{this.email}}</td>
-
-            {{! DELETE form }}
-            <form id='delete_customer_form' method="POST" action="customers/delete">
-                <input type='hidden' name='delete_customer_id' value='{{this.customerID}}' />
-                <input type='hidden' name='delete_customer_name' value='{{this.fName}} {{this.lName}}' />
-                <td>
-                    <button type='submit'>
-                        Delete
-                    </button>
-                </td>
-            </form>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-
-{{! CREATE form }}
-<h2>Create a Customer</h2>
-<form class='cuForm' id='create_customer_form' method="POST" action="/customers/create">
-    <label for='create_customer_fname'>First Name: </label>
-    <input type='text' name='create_customer_fname' id='create_customer_fname' required />
-
-    <label for='create_customer_lname'>Last Name: </label>
-    <input type='text' name='create_customer_lname' id='create_customer_lname' />
-
-    <label for='create_customer_ad1'>Address Line 1: </label>
-    <input type='text' name='create_customer_ad1' id='create_customer_ad1' required />
-
-    <label for='create_customer_ad2'>Addresss Line 2: </label>
-    <input type='text' name='create_customer_ad2' id='create_customer_ad2' />
-
-    <label for='create_customer_city'>City: </label>
-    <input type='text' name='create_customer_city' id='create_customer_city' required />
-
-    <label for='create_customer_state'>State: </label>
-    <input type='text' name='create_customer_state' id='create_customer_state' required />
-
-    <label for='create_customer_country'>Country: </label>
-    <input type='text' name='create_customer_country' id='create_customer_country' required />
-
-    <label for='create_customer_postalcode'>postalCode: </label>
-    <input type='number' name='create_customer_postalcode' id='create_customer_postalcode' required />
-
-    <label for='create_customer_number'>phoneNumber: </label>
-    <input type='number' name='create_customer_number' id='create_customer_number' required />
-
-    <label for='create_customer_email'>email: </label>
-    <input type='email' name='create_customer_email' id='create_customer_email' required />
-
-    <input type='submit' />
-</form>
-
-{{! UPDATE form }}
-<h2>Update a Customer</h2>
-<form class='cuForm' id='update_customer_form' method="POST" action="/customers/update">
-    <label for='update_customer_id'>Customer to Update: </label>
-    <select name='update_customer_id' id='update_customer_id' required>
-        <option value='' disabled selected>Select a Customer</option>
-        {{#each customers}}
-        <option value='{{this.customerID}}' required>
-            {{this.customerID}}
-            -
-            {{this.fName}}
-            {{this.lName}}
-        </option>
-        {{/each}}
-    </select>
-
-    <label for='update_customer_fname'>First Name: </label>
-    <input type='text' name='update_customer_fname' id='update_customer_fname' />
-
-    <label for='update_customer_lname'>Last Name: </label>
-    <input type='text' name='update_customer_lname' id='update_customer_lname' />
-
-    <label for='update_customer_ad1'>Address Line 1: </label>
-    <input type='text' name='update_customer_ad1' id='update_customer_ad1' />
-
-    <label for='update_customer_ad2'>Addresss Line 2: </label>
-    <input type='text' name='update_customer_ad2' id='update_customer_ad2' />
-
-    <label for='update_customer_city'>City: </label>
-    <input type='text' name='update_customer_city' id='update_customer_city' />
-
-    <label for='update_customer_state'>State: </label>
-    <input type='text' name='update_customer_state' id='update_customer_state' />
-
-    <label for='update_customer_country'>Country: </label>
-    <input type='text' name='update_customer_country' id='update_customer_country' />
-
-    <label for='update_customer_postalcode'>postalCode: </label>
-    <input type='number' name='update_customer_postalcode' id='update_customer_postalcode' />
-
-    <label for='update_customer_number'>phoneNumber: </label>
-    <input type='number' name='update_customer_number' id='update_customer_number' />
-
-    <label for='update_customer_email'>email: </label>
-    <input type='email' name='update_customer_email' id='update_customer_email' />
-
-    <input type='submit' />
-</form>
+        </tbody>
+    </table>
+    
+    {{! CREATE form }}
+    <h2>Create a Customer</h2>
+    <form class='cuForm' id='create_customer_form' method="POST" action="/customers/create">
+        <label for='create_customer_fname'>First Name: </label>
+        <input type='text' name='create_customer_fname' id='create_customer_fname' required />
+    
+        <label for='create_customer_lname'>Last Name: </label>
+        <input type='text' name='create_customer_lname' id='create_customer_lname' />
+    
+        <label for='create_customer_ad1'>Address Line 1: </label>
+        <input type='text' name='create_customer_ad1' id='create_customer_ad1' required />
+    
+        <label for='create_customer_ad2'>Addresss Line 2: </label>
+        <input type='text' name='create_customer_ad2' id='create_customer_ad2' />
+    
+        <label for='create_customer_city'>City: </label>
+        <input type='text' name='create_customer_city' id='create_customer_city' required />
+    
+        <label for='create_customer_state'>State: </label>
+        <input type='text' name='create_customer_state' id='create_customer_state' required />
+    
+        <label for='create_customer_country'>Country: </label>
+        <input type='text' name='create_customer_country' id='create_customer_country' required />
+    
+        <label for='create_customer_postalcode'>Postal Code: </label>
+        <input type='number' name='create_customer_postalcode' id='create_customer_postalcode' required />
+    
+        <label for='create_customer_number'>Phone Number: </label>
+        <input type='number' name='create_customer_number' id='create_customer_number' required />
+    
+        <label for='create_customer_email'>Email: </label>
+        <input type='email' name='create_customer_email' id='create_customer_email' required />
+    
+        <input type='submit' />
+    </form>
+    
+    {{! UPDATE form }}
+    <h2>Update a Customer</h2>
+    <form class='cuForm' id='update_customer_form' method="POST" action="/customers/update">
+        <label for='update_customer_id'>Customer to Update: </label>
+        <select name='update_customer_id' id='update_customer_id' required>
+            <option value='' disabled selected>Select a Customer</option>
+            {{#each customers}}
+            <option value='{{this.customerID}}' required>
+                {{this.customerID}}
+                -
+                {{this.fName}}
+                {{this.lName}}
+            </option>
+            {{/each}}
+        </select>
+    
+        <label for='update_customer_fname'>First Name: </label>
+        <input type='text' name='update_customer_fname' id='update_customer_fname' />
+    
+        <label for='update_customer_lname'>Last Name: </label>
+        <input type='text' name='update_customer_lname' id='update_customer_lname' />
+    
+        <label for='update_customer_ad1'>Address Line 1: </label>
+        <input type='text' name='update_customer_ad1' id='update_customer_ad1' />
+    
+        <label for='update_customer_ad2'>Addresss Line 2: </label>
+        <input type='text' name='update_customer_ad2' id='update_customer_ad2' />
+    
+        <label for='update_customer_city'>City: </label>
+        <input type='text' name='update_customer_city' id='update_customer_city' />
+    
+        <label for='update_customer_state'>State: </label>
+        <input type='text' name='update_customer_state' id='update_customer_state' />
+    
+        <label for='update_customer_country'>Country: </label>
+        <input type='text' name='update_customer_country' id='update_customer_country' />
+    
+        <label for='update_customer_postalcode'>Postal Code: </label>
+        <input type='number' name='update_customer_postalcode' id='update_customer_postalcode' />
+    
+        <label for='update_customer_number'>Phone Number: </label>
+        <input type='number' name='update_customer_number' id='update_customer_number' />
+    
+        <label for='update_customer_email'>Email: </label>
+        <input type='email' name='update_customer_email' id='update_customer_email' />
+    
+        <input type='submit' />
+    </form>
+</div>

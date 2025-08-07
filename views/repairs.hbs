@@ -1,130 +1,137 @@
-<h1>Repairs</h1>
-
-{{! READ table }}
-<table>
-    <thead>
-        {{! For the table header row, we print the DB attribute names }}
-        <tr>
-            {{#each repairs.[0]}}
-            <th>
-                {{@key}}
-            </th>
+<div class = "repairs-page">
+    <h1>Repairs</h1>
+    
+    {{! READ table }}
+    <table>
+        <thead>
+            <tr>
+                <th>Repair ID</th>
+                <th>Car ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Employee First Name</th>
+                <th>Employee Last Name</th>
+                <th>Service Date</th>
+                <th>Service Type</th>
+                <th>Notes</th>
+                <th>Cost</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            {{! Print each row }}
+            {{#each repairs}}
+            <tr>
+                <td>{{this.repairID}}</td>
+                <td>{{this.carID}}</td>
+                <td>{{this.make}}</td>
+                <td>{{this.model}}</td>
+                <td>{{this.year}}</td>
+                <td>{{this.fName}}</td>
+                <td>{{this.lName}}</td>
+                <td>{{this.serviceDate}}</td>
+                <td>{{this.serviceType}}</td>
+                <td>{{this.notes}}</td>
+                <td>{{this.cost}}</td>
+    
+                {{! DELETE form }}
+                <form id='delete_repair_form' method="POST" action="repairs/delete">
+                    <input type='hidden' name='delete_repair_id' value='{{this.repairID}}' />
+                    <td>
+                        <button type='submit'>
+                            Delete
+                        </button>
+                    </td>
+                </form>
+            </tr>
             {{/each}}
-            <th></th>
-        </tr>
-    </thead>
-
-    <tbody>
-        {{! Print each row }}
-        {{#each repairs}}
-        <tr>
-            <td>{{this.repairID}}</td>
-            <td>{{this.carID}}</td>
-            <td>{{this.year}}</td>
-            <td>{{this.make}}</td>
-            <td>{{this.model}}</td>
-            <td>{{this.fName}}</td>
-            <td>{{this.lName}}</td>
-            <td>{{this.serviceDate}}</td>
-            <td>{{this.serviceType}}</td>
-            <td>{{this.notes}}</td>
-            <td>{{this.cost}}</td>
-
-            {{! DELETE form }}
-            <form id='delete_repair_form' method="POST" action="repairs/delete">
-                <input type='hidden' name='delete_repair_id' value='{{this.repairID}}' />
-                <td>
-                    <button type='submit'>
-                        Delete
-                    </button>
-                </td>
-            </form>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-
-{{! CREATE form }}
-<h2>Create a Repair</h2>
-<form class='cuForm' id='create_repair_form' method="POST" action="/repairs/create">
-
-    <label for='create_repair_car'>Car: </label>
-    <select name='create_repair_car' id='create_repair_car'>
-        <option value='NULL' disabled selected>Select a Car</option>
-        {{#each cars}}
-        <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
-        {{/each}}
-    </select>
-
-    <label for='create_repair_employee'>Employee: </label>
-    <select name='create_repair_employee' id='create_repair_employee'>
-        <option value='NULL' disabled selected>Select an Employee</option>
-        {{#each employees}}
-        <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
-        {{/each}}
-    </select>
-
-    <label for='create_repair_date'>Service Date: </label>
-    <input type='date' name='create_repair_date' id='create_repair_date' required />
-
-    <label for='create_repair_type'>Service Type: </label>
-    <input type='text' name='create_repair_type' id='create_repair_type' required/>
-
-    <label for='create_repair_notes'>Notes: </label>
-    <input type='text' name='create_repair_notes' id='create_repair_notes' required />
-
-    <label for='create_repair_cost'>Cost: </label>
-    <input type='number' name='create_repair_cost' id='create_repair_cost' required />
-
-    <input type='submit' />
-</form>
-
-{{! UPDATE form }}
-<h2>Update a Repair</h2>
-<form class='cuForm' id='update_repair_form' method="POST" action="/repairs/update">
-    <label for='update_repair_id'>Repair to Update: </label>
-    <select name='update_repair_id' id='update_repair_id' required>
-        <option value='' disabled selected>Select a Repair</option>
-        {{#each repairs}}
-        <option value='{{this.repairID}}' required>
-            {{this.repairID}}
-            -
-            {{this.carID}}
-            {{this.year}}
-            {{this.make}}
-            {{this.model}}
-            {{this.serviceType}}
-        </option>
-        {{/each}}
-    </select>
-
-    <label for='update_repair_car'>Car: </label>
-    <select name='update_repair_car' id='update_repair_car'>
-        <option value='NULL' disabled selected>Select a Car</option>
-        {{#each cars}}
-        <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
-        {{/each}}
-    </select>
-
-    <label for='update_repair_employee'>Employee: </label>
-    <select name='update_repair_employee' id='update_repair_employee'>
-        <option value='NULL' selected>Select a Employee</option>
-        {{#each employees}}
-        <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
-        {{/each}}
-    </select>
-
-    <label for='update_repair_date'>Service Date: </label>
-    <input type='date' name='update_repair_date' id='update_repair_date' />
-
-    <label for='update_repair_type'>Service Type: </label>
-    <input type='text' name='update_repair_type' id='update_repair_type' />
-
-    <label for='update_repair_notes'>Notes: </label>
-    <input type='text' name='update_repair_notes' id='update_repair_notes' />
-
-    <label for='update_repair_cost'>Cost: </label>
-    <input type='number' name='update_repair_cost' id='update_repair_cost' />
-
-    <input type='submit' />
-</form>
+        </tbody>
+    </table>
+    
+    {{! CREATE form }}
+    <h2>Create a Repair</h2>
+    <form class='cuForm' id='create_repair_form' method="POST" action="/repairs/create">
+    
+        <label for='create_repair_car'>Car: </label>
+        <select name='create_repair_car' id='create_repair_car'>
+            <option value='NULL' disabled selected>Select a Car</option>
+            {{#each cars}}
+            <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
+            {{/each}}
+        </select>
+    
+        <label for='create_repair_employee'>Employee: </label>
+        <select name='create_repair_employee' id='create_repair_employee'>
+            <option value='NULL' disabled selected>Select an Employee</option>
+            {{#each employees}}
+            <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
+            {{/each}}
+        </select>
+    
+        <label for='create_repair_date'>Service Date: </label>
+        <input type='date' name='create_repair_date' id='create_repair_date' required />
+    
+        <label for='create_repair_type'>Service Type: </label>
+        <input type='text' name='create_repair_type' id='create_repair_type' required/>
+    
+        <label for='create_repair_notes'>Notes: </label>
+        <input type='text' name='create_repair_notes' id='create_repair_notes' required />
+    
+        <label for='create_repair_cost'>Cost: </label>
+        <input type='number' name='create_repair_cost' id='create_repair_cost' required />
+    
+        <input type='submit' />
+    </form>
+    
+    {{! UPDATE form }}
+    <h2>Update a Repair</h2>
+    <form class='cuForm' id='update_repair_form' method="POST" action="/repairs/update">
+        <label for='update_repair_id'>Repair to Update: </label>
+        <select name='update_repair_id' id='update_repair_id' required>
+            <option value='' disabled selected>Select a Repair</option>
+            {{#each repairs}}
+            <option value='{{this.repairID}}' required>
+                {{this.repairID}}
+                -
+                {{this.carID}}
+                {{this.year}}
+                {{this.make}}
+                {{this.model}}
+                {{this.serviceType}}
+            </option>
+            {{/each}}
+        </select>
+    
+        <label for='update_repair_car'>Car: </label>
+        <select name='update_repair_car' id='update_repair_car'>
+            <option value='NULL' disabled selected>Select a Car</option>
+            {{#each cars}}
+            <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
+            {{/each}}
+        </select>
+    
+        <label for='update_repair_employee'>Employee: </label>
+        <select name='update_repair_employee' id='update_repair_employee'>
+            <option value='NULL' selected>Select a Employee</option>
+            {{#each employees}}
+            <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
+            {{/each}}
+        </select>
+    
+        <label for='update_repair_date'>Service Date: </label>
+        <input type='date' name='update_repair_date' id='update_repair_date' />
+    
+        <label for='update_repair_type'>Service Type: </label>
+        <input type='text' name='update_repair_type' id='update_repair_type' />
+    
+        <label for='update_repair_notes'>Notes: </label>
+        <input type='text' name='update_repair_notes' id='update_repair_notes' />
+    
+        <label for='update_repair_cost'>Cost: </label>
+        <input type='number' name='update_repair_cost' id='update_repair_cost' />
+    
+        <input type='submit' />
+    </form>
+</div>
