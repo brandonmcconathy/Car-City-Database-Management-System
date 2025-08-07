@@ -1,3 +1,10 @@
+// Citation for app.js file:
+// Date: 8/7/25
+// The code in this file was copied and modified from multiple explorations.
+// Setup code and read routes: https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612
+// Create, update, and delete routes: https://canvas.oregonstate.edu/courses/2007765/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25664628
+// No AI tools were used.
+
 // ########################################
 // ########## SETUP
 

@@ -19,7 +19,7 @@ BEGIN
     DROP TABLE IF EXISTS Repairs;
     DROP TABLE IF EXISTS Transactions;
 
-    -- Creates all tables
+    -- Create Customers table
     CREATE TABLE Customers (
         customerID INT NOT NULL AUTO_INCREMENT,
         fName VARCHAR(100) NOT NULL,
@@ -35,6 +35,7 @@ BEGIN
         PRIMARY KEY (customerID)
     );
 
+    -- Create Employees table
     CREATE TABLE Employees (
         employeeID INT NOT NULL AUTO_INCREMENT,
         fName VARCHAR(100) NOT NULL,
@@ -46,6 +47,7 @@ BEGIN
         PRIMARY KEY (employeeID)
     );
 
+    -- Create CarModel table
     CREATE TABLE CarModel (
         carModelID INT NOT NULL AUTO_INCREMENT,
         make VARCHAR(50) NOT NULL,
@@ -55,6 +57,7 @@ BEGIN
         UNIQUE (make, model, year)
     );
 
+    -- Create Cars table
     CREATE TABLE Cars (
         carID INT NOT NULL AUTO_INCREMENT,
         carModelID INT NOT NULL,
@@ -66,6 +69,7 @@ BEGIN
         ON DELETE CASCADE
     );
 
+    -- Create Repairs table
     CREATE TABLE Repairs (
         repairID INT NOT NULL AUTO_INCREMENT,
         employeeID INT NOT NULL,
@@ -81,6 +85,7 @@ BEGIN
         ON DELETE CASCADE
     );
 
+    -- Create Transactions table
     CREATE TABLE Transactions (
         transactionID INT NOT NULL AUTO_INCREMENT,
         customerID INT NOT NULL,
@@ -98,7 +103,7 @@ BEGIN
         ON DELETE CASCADE
     );
 
-    -- Inserts data into all of the tables
+    -- Inserts data into the Customers table
     INSERT INTO Customers (fName, lName, addressLine1, city, state, country, postalCode, phoneNumber, email)
     VALUES ("John", "Doe", "123 State St", "Los Angeles", "California", "United States", "90001", "6265551234", "johndoe@example.com"),
     ("Alex", "Johnson", "321 Apple St", "Los Angeles", "California", "United States", "90001", "6265554321", "alex.j@example.com"),
@@ -107,6 +112,7 @@ BEGIN
     ("Linda", "Smith", "987 Main St", "Portland", "Oregon", "United States", "70001", "6215559229", "lindasmith@example.com"),
     ("Jane", "Doe", "123 State St", "Los Angeles", "California", "United States", "90001", "6265559090", "janedoe@example.com");
 
+    -- Inserts data into the Employees table
     INSERT INTO Employees (fName, lName, jobTitle, isDealer, email, phoneNumber)
     VALUES
     ("Michael", "Scott", "Sales Manager", TRUE, "mscott@carcity.com", "5551234567"),
@@ -116,6 +122,7 @@ BEGIN
     ("Stanley", "Hudson", "Finance Manager", FALSE, "stanley@carcity.com", "5555678901"),
     ("Angela", "Martin", "Service Advisor", FALSE, "angela@carcity.com", "5556789012");
 
+    -- Inserts data into the CarModel table
     INSERT INTO CarModel (make, model, year)
     VALUES ("Honda", "Accord", 2025),
     ("Honda", "Accord", 2024),
@@ -125,6 +132,7 @@ BEGIN
     ("Tesla", "Model 3", 2025),
     ("Tesla", "Model Y", 2024);
 
+    -- Inserts data into the Cars table
     INSERT INTO Cars (carModelID, isPreOwned,receivedDate, isForSale)
     VALUES ((SELECT carModelID FROM CarModel WHERE make = "Honda" AND model = "Accord" AND year = 2025), FALSE, "2025-03-10", TRUE),
     ((SELECT carModelID FROM CarModel WHERE make = "Honda" AND model = "Accord" AND year = 2024), TRUE, "2025-05-02", TRUE),
@@ -133,6 +141,7 @@ BEGIN
     ((SELECT carModelID FROM CarModel WHERE make = "Tesla" AND model = "Model Y" AND year = 2024), TRUE, "2024-12-20", FALSE),
     ((SELECT carModelID FROM CarModel WHERE make = "Tesla" AND model = "Model Y" AND year = 2024), TRUE, "2024-12-20", TRUE);
 
+    -- Inserts data into the Repairs table
     INSERT INTO Repairs (employeeID, carID, serviceDate, serviceType, notes, cost)
     VALUES (1, 1, '2025-06-15', 'Oil Change', 'Customer requested synthetic oil.', 89.99),
     (2, 2, '2025-06-20', 'Brake Replacement', 'Front and rear brakes replaced.', 450.00),
@@ -141,6 +150,7 @@ BEGIN
     (5, 5, '2025-07-15', 'AC Repair', 'Fixed AC compressor issue.', 299.99),
     (6, 6, '2025-07-20', 'Transmission Service', 'Full transmission flush and filter change.', 799.00);
 
+    -- Inserts data into the Transactions table
     INSERT INTO Transactions (customerID, employeeID, carID, transactionDate, transactionAmount, paid) 
     VALUES  (1, 2, 1, '2025-06-01', 23999.99, TRUE),
     (2, 3, 2, '2025-06-10', 18950.00, TRUE),
