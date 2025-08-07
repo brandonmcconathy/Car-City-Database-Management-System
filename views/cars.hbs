@@ -6,12 +6,10 @@
         <thead>
             <tr>
                 <th>Car ID</th>
+                <th>Car Model ID</th>
                 <th>Is Pre-Owned</th>
                 <th>Date Revieved</th>
                 <th>Is For Sale</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Year</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,12 +19,10 @@
             {{#each cars}}
             <tr>
                 <td>{{this.carID}}</td>
-                <td>{{this.isPreOwned}}</td>
+                <td>{{this.carModelID}}</td>
+                <td>{{boolToString this.isPreOwned}}</td>
                 <td>{{this.receivedDate}}</td>
-                <td>{{this.isForSale}}</td>
-                <td>{{this.make}}</td>
-                <td>{{this.model}}</td>
-                <td>{{this.year}}</td>
+                <td>{{boolToString this.isForSale}}</td>
     
                 {{! DELETE form }}
                 <form id='delete_car_form' method="POST" action="cars/delete">
@@ -46,18 +42,19 @@
     {{! CREATE form }}
     <h2>Create a Car</h2>
     <form class='cuForm' id='create_car_form' method="POST" action="/cars/create">
-    
         <label for='create_car_model'>Car Model: </label>
-        <select name='create_car_model' id='create_car_model'>
-            <option value='NULL' disabled selected>Select a Car Model</option>
+        <select name='create_car_model' id='create_car_model' required>
+            <option value='' disabled selected>Select a Car Model</option>
             {{#each models}}
-            <option value='{{this.carModelID}}' required>{{this.year}} {{this.make}} {{this.model}}</option>
+            <option value='{{this.carModelID}}' required>
+                {{this.year}} {{this.make}} {{this.model}}
+            </option>
             {{/each}}
         </select>
     
         <label for='create_car_pre'>Is Pre Owned: </label>
         <select name='create_car_pre' id='create_car_pre' required>
-            <option value="" disabled selected>Select true or false</option>
+            <option value="" disabled selected>Select True or False</option>
             <option value="true">True</option>
             <option value="false">False</option>
         </select>
@@ -67,48 +64,56 @@
         <input type='date' name='create_car_date' id='create_car_date' required/>
     
         <label for='create_car_sale'>Is For Sale: </label>
-        <input type='text' name='create_car_sale' id='create_car_sale' required />
+        <select name='create_car_sale' id='create_car_sale' required>
+            <option value="" disabled selected>Select True or False</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
     
         <input type='submit' />
     </form>
     
     {{! UPDATE form }}
     <h2>Update a Car</h2>
+    {{! UPDATE form }}
     <form class='cuForm' id='update_car_form' method="POST" action="/cars/update">
         <label for='update_car_id'>Car to Update: </label>
         <select name='update_car_id' id='update_car_id' required>
-            <option value='' disabled selected>Select a Car</option>
+            <option value='' disabled selected>Select a Car ID</option>
             {{#each cars}}
             <option value='{{this.carID}}' required>
-                {{this.carID}}
-                -
-                {{this.year}}
-                {{this.make}}
-                {{this.model}}
+                {{this.carID}}{{this.year}} {{this.make}} {{this.model}}
             </option>
             {{/each}}
         </select>
-    
-        <select name='update_car_model' id='update_car_model'>
-            <option value='NULL' disabled selected>Select a Car Model</option>
+
+        <label for='update_car_model'>Car Model: </label>
+        <select name='update_car_model' id='update_car_model' required>
+            <option value='' disabled selected>Select a Car Model</option>
             {{#each models}}
-            <option value='{{this.carModelID}}' required>{{this.year}} {{this.make}} {{this.model}}</option>
+            <option value='{{this.carModelID}}' required>
+                {{this.year}} {{this.make}} {{this.model}}
+            </option>
             {{/each}}
         </select>
-    
-        <label for='update_car_pre'>Is Pre Owned: </label>
+
+        <label for='update_car_pre'>Is Pre-Owned: </label>
         <select name='update_car_pre' id='update_car_pre' required>
-            <option value="" disabled selected>Select true or false</option>
+            <option value="" disabled selected>Select True or False</option>
             <option value="true">True</option>
             <option value="false">False</option>
         </select>
-    
+
         <label for='update_car_date'>Received Date: </label>
-        <input type='date' name='update_car_date' id='update_car_date' />
-    
+        <input type='date' name='update_car_date' id='update_car_date' required />
+
         <label for='update_car_sale'>Is For Sale: </label>
-        <input type='text' name='update_car_sale' id='update_car_sale' />
-    
+        <select name='update_car_sale' id='update_car_sale' required>
+            <option value="" disabled selected>Select True or False</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+
         <input type='submit' />
     </form>
 </div>

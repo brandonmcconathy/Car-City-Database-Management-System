@@ -18,7 +18,12 @@ const db = require('./database/db-connector');
 
 // Handlebars
 const { engine } = require('express-handlebars'); // Import express-handlebars engine
-app.engine('.hbs', engine({ extname: '.hbs' })); // Create instance of handlebars
+app.engine('.hbs', engine({
+  extname: '.hbs',
+  helpers: {
+    boolToString: (value) => value ? 'True' : 'False',
+  },
+})); // Create instance of handlebars with helper
 app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 
 // ########################################
@@ -80,7 +85,7 @@ app.get('/car-models', async function (req, res) {
 app.get('/cars', async function (req, res) {
     try {
         const query1 = `SELECT Cars.carID, Cars.isPreOwned, Cars.receivedDate, \
-            Cars.isForSale, CarModel.make, CarModel.model, CarModel.year \
+            Cars.isForSale, CarModel.carModelID \
             FROM Cars INNER JOIN CarModel ON Cars.CarModelID = CarModel.CarModelID;`;
         const query2 = 'SELECT * FROM CarModel;';
         const [cars] = await db.query(query1);

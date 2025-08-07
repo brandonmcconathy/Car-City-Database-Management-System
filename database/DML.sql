@@ -21,8 +21,8 @@ SELECT * FROM CarModel;
 -- Select all cars from the Cars table with the car model joined.
 -- This displays all cars when visiting cars page.
 SELECT Cars.carID, Cars.isPreOwned, Cars.receivedDate, 
-    Cars.isForSale, CarModel.make, CarModel.model, CarModel.year
-FROM Cars INNER JOIN CarModel ON Cars.CarModelID = CarModel.CarModelID;
+    Cars.isForSale, cm.carModelID as carModelID
+FROM Cars INNER JOIN CarModel cm ON Cars.CarModelID = cm.CarModelID;
 -- Selects all car models for the dropdowns on update and create
 SELECT * FROM CarModel;
 
