@@ -1,6 +1,11 @@
 -- Group 12, Car City Sales Management System
 -- Lindsey Clement & Brandon Mcconathy
--- All work is our own. No AI tools were used.
+
+-- Citation for PLSQL.sql file:
+-- Date: 8/7/25
+-- The code in this file was copied and modified from the implementing CUD operations in your app exploration.
+-- Source: https://canvas.oregonstate.edu/courses/2007765/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25664628
+-- No AI tools were used.
 
 -- #############################
 -- #############################
