@@ -40,8 +40,8 @@
                 <td>{{this.serviceDate}}</td>
                 <td>{{this.serviceType}}</td>
                 <td>{{this.notes}}</td>
-                <td>{{this.cost}}</td>
-    
+                <td>{{formatCurrency this.cost}}</td>
+                
                 {{! DELETE form }}
                 <form id='delete_repair_form' method="POST" action="repairs/delete">
                     <input type='hidden' name='delete_repair_id' value='{{this.repairID}}' />

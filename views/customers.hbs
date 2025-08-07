@@ -41,7 +41,7 @@
                 <td>{{this.country}}</td>
                 <td>{{this.postalCode}}</td>
                 <td>{{this.email}}</td>
-                <td>{{this.phoneNumber}}</td>
+                <td>{{formatPhone this.phoneNumber}}</td>
     
                 {{! DELETE form }}
                 <form id='delete_customer_form' method="POST" action="customers/delete">

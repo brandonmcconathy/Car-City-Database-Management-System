@@ -25,12 +25,24 @@ const db = require('./database/db-connector');
 
 // Handlebars
 const { engine } = require('express-handlebars'); // Import express-handlebars engine
+
 app.engine('.hbs', engine({
   extname: '.hbs',
   helpers: {
     boolToString: (value) => value ? 'True' : 'False',
+    formatPhone: (number) => {
+      const str = number.toString();
+      if (str.length === 10) {
+        return `(${str.slice(0,3)})-${str.slice(3,6)}-${str.slice(6)}`;
+      }
+      return number; // fallback if not 10 digits
+    },
+    formatCurrency: (amount) => {
+        return `$${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+    }
   },
 })); // Create instance of handlebars with helper
+
 app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 
 // ########################################
