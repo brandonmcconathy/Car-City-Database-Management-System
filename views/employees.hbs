@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! Print each row }}
         {{#each employees}}
         <tr>
             <td>{{this.employeeID}}</td>
@@ -27,7 +27,7 @@
             <td>{{this.phoneNumber}}</td>
 
             {{! DELETE form }}
-            <form id='delete_employee_form'>
+            <form id='delete_employee_form' method="POST" action="employees/delete">
                 <input type='hidden' name='delete_employee_id' value='{{this.employeeID}}' />
                 <input type='hidden' name='delete_employee_name' value='{{this.fName}} {{this.lName}}' />
                 <td>
@@ -43,12 +43,12 @@
 
 {{! CREATE form }}
 <h2>Create an Employee</h2>
-<form class='cuForm' id='create_employee_form'>
-    <label for='create_employee_fName'>First Name: </label>
-    <input type='text' name='create_employee_fName' id='create_employee_fName' required />
+<form class='cuForm' id='create_employee_form' method="POST" action="/employees/create">
+    <label for='create_employee_fname'>First Name: </label>
+    <input type='text' name='create_employee_fname' id='create_employee_fname' required />
 
-    <label for='create_employee_lName'>Last Name: </label>
-    <input type='text' name='create_employee_lName' id='create_employee_lName' required/>
+    <label for='create_employee_lname'>Last Name: </label>
+    <input type='text' name='create_employee_lname' id='create_employee_lname' required/>
 
     <label for='create_employee_jt'>jobTitle: </label>
     <input type='text' name='create_employee_jt' id='create_employee_jt' required />
@@ -66,8 +66,8 @@
 </form>
 
 {{! UPDATE form }}
-<h2>Update a Employee</h2>
-<form class='cuForm' id='update_employee_form'>
+<h2>Update an Employee</h2>
+<form class='cuForm' id='update_employee_form' method="POST" action="/employees/update">
     <label for='update_employee_id'>Employee to Update: </label>
     <select name='update_employee_id' id='update_employee_id' required>
         <option value='' disabled selected>Select a Employee</option>
@@ -81,6 +81,12 @@
         {{/each}}
     </select>
 
+    <label for='update_employee_fname'>First Name: </label>
+    <input type='text' name='update_employee_fname' id='update_employee_fname' />
+
+    <label for='update_employee_lname'>Last Name: </label>
+    <input type='text' name='update_employee_lname' id='update_employee_lname' />
+
     <label for='update_employee_jt'>Job Title: </label>
     <input type='text' name='update_employee_jt' id='update_employee_jt' />
 
@@ -90,8 +96,8 @@
     <label for='update_employee_email'>Email: </label>
     <input type='email' name='update_employee_email' id='update_employee_email' />
 
-    <label for='update_employee_phone'>Phone Number: </label>
-    <input type='number' name='update_employee_phone' id='update_employee_phone' />
+    <label for='update_employee_number'>Phone Number: </label>
+    <input type='number' name='update_employee_number' id='update_employee_number' />
 
     <input type='submit' />
 </form>

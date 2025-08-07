@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-        {{! For each row, print the id, fname, lname, homeworld and age }}
+        {{! Print each row }}
         {{#each repairs}}
         <tr>
             <td>{{this.repairID}}</td>
@@ -31,7 +31,7 @@
             <td>{{this.cost}}</td>
 
             {{! DELETE form }}
-            <form id='delete_repair_form'>
+            <form id='delete_repair_form' method="POST" action="repairs/delete">
                 <input type='hidden' name='delete_repair_id' value='{{this.repairID}}' />
                 <td>
                     <button type='submit'>
@@ -46,19 +46,19 @@
 
 {{! CREATE form }}
 <h2>Create a Repair</h2>
-<form class='cuForm' id='create_repair_form'>
+<form class='cuForm' id='create_repair_form' method="POST" action="/repairs/create">
 
-    <label for='create_car'>Car: </label>
-    <select name='create_car' id='create_car'>
-        <option value='NULL' selected>Select a Car</option>
+    <label for='create_repair_car'>Car: </label>
+    <select name='create_repair_car' id='create_repair_car'>
+        <option value='NULL' disabled selected>Select a Car</option>
         {{#each cars}}
         <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
         {{/each}}
     </select>
 
-    <label for='create_employee'>Employee: </label>
-    <select name='create_employee' id='create_employee'>
-        <option value='NULL' selected>Select a Employee</option>
+    <label for='create_repair_employee'>Employee: </label>
+    <select name='create_repair_employee' id='create_repair_employee'>
+        <option value='NULL' disabled selected>Select an Employee</option>
         {{#each employees}}
         <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
         {{/each}}
@@ -81,7 +81,7 @@
 
 {{! UPDATE form }}
 <h2>Update a Repair</h2>
-<form class='cuForm' id='update_repair_form'>
+<form class='cuForm' id='update_repair_form' method="POST" action="/repairs/update">
     <label for='update_repair_id'>Repair to Update: </label>
     <select name='update_repair_id' id='update_repair_id' required>
         <option value='' disabled selected>Select a Repair</option>
@@ -98,8 +98,16 @@
         {{/each}}
     </select>
 
-    <label for='update_employee'>Employee: </label>
-    <select name='update_employee' id='update_employee'>
+    <label for='update_repair_car'>Car: </label>
+    <select name='update_repair_car' id='update_repair_car'>
+        <option value='NULL' disabled selected>Select a Car</option>
+        {{#each cars}}
+        <option value='{{this.carID}}' required>{{this.carID}} {{this.year}} {{this.make}} {{this.model}}</option>
+        {{/each}}
+    </select>
+
+    <label for='update_repair_employee'>Employee: </label>
+    <select name='update_repair_employee' id='update_repair_employee'>
         <option value='NULL' selected>Select a Employee</option>
         {{#each employees}}
         <option value='{{this.employeeID}}' required>{{this.fName}} {{this.lName}}</option>
@@ -107,7 +115,7 @@
     </select>
 
     <label for='update_repair_date'>Service Date: </label>
-    <input type='text' name='update_repair_date' id='update_repair_date' />
+    <input type='date' name='update_repair_date' id='update_repair_date' />
 
     <label for='update_repair_type'>Service Type: </label>
     <input type='text' name='update_repair_type' id='update_repair_type' />
