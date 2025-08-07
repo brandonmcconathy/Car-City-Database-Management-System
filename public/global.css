@@ -1,0 +1,153 @@
+body {
+background-color: blanchedalmond;
+font-family: sans-serif;
+text-align: center;
+margin: 0;
+padding: 0;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 1rem;
+background-color: white;
+}
+
+th, td {
+border: 2px solid black;
+padding: 10px;
+text-align: left;
+}
+
+th {
+background-color: #f0e68c;
+}
+
+button {
+margin: 0 0.25rem;
+padding: 0.5rem 1rem;
+border: none;
+background-color: #4682b4;
+color: white;
+cursor: pointer;
+border-radius: 4px;
+}
+
+button:hover {
+background-color: #315f7d;
+}
+
+form {
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+max-width: 500px;
+margin: 2rem auto;
+text-align: left;
+}
+
+form input, form button {
+padding: 10px;
+font-size: 1rem;
+}
+
+/* Navbar */
+.navbar{
+  position: fixed;       /* Fix to the top of the viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;         /* Full viewport width */
+  height: 70px;         /* Taller navbar */
+  background-color: tan;
+  display: flex;
+  justify-content: center;  /* Center the links */
+  align-items: center;
+  margin: 0;            /* Remove default margin */
+  padding: 0;           /* Remove default padding */
+  box-sizing: border-box; /* Make sure padding/borders don't affect size */
+  z-index: 1000;        /* Make sure navbar stays on top */
+  border: none;         /* No border */
+  box-shadow: none;
+}
+
+.navbar-links {
+    list-style: none;
+    display: inline-flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.navbar-links li a {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    font-size:18px;
+}
+  
+.navbar-links li a:hover {
+    text-decoration: underline;
+}
+
+/* Homepage */
+.homepage-text {
+    margin: 170px auto;
+    width: 60%;
+    padding: 2em;
+    background: tan;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 20px;
+    font-size: x-large;
+}
+
+.homepage {
+    font-size: x-large;
+    padding-top: 150px;
+}
+
+/* Pages */
+.customers-page, .employees-page, .cars-page, .car-models-page, .repairs-page, .transactions-page {
+    padding: 2rem;
+    padding-top: 70px;
+}
+
+/* Dropdowns */
+.cuForm input,
+.cuForm select {
+  width: 100%;       
+  padding: 8px 12px; 
+  font-size: 1rem;   
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; 
+  margin-bottom: 1rem; 
+  font-family: inherit; 
+  appearance: none;  
+  background-color: white;
+  color: #333;
+}
+
+.cuForm select {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+  padding-right: 36px; 
+}
+
+/* Submit Buttons */
+.cuForm input[type="submit"] {
+    background-color: #444;  
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+.cuForm input[type="submit"]:hover {
+    background-color: #222; 
+  }
