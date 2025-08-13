@@ -13,9 +13,6 @@
             <tr>
                 <th>Transaction ID</th>
                 <th>Car ID</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Year</th>
                 <th>Employee First Name</th>
                 <th>Employee Last Name</th>
                 <th>Customer First Name</th>
@@ -33,9 +30,6 @@
             <tr>
                 <td>{{this.transactionID}}</td>
                 <td>{{this.carID}}</td>
-                <td>{{this.year}}</td>
-                <td>{{this.make}}</td>
-                <td>{{this.model}}</td>
                 <td>{{this.eFName}}</td>
                 <td>{{this.eLName}}</td>
                 <td>{{this.cFName}}</td>
@@ -90,8 +84,8 @@
         <input type='date' name='create_transaction_date' id='create_transaction_date' required />
     
         <label for='create_transaction_amount'>Transaction Amount: </label>
-        <input type='number' name='create_transaction_amount' id='create_transaction_amount' required/>
-    
+        <input type='text' name='create_transaction_amount' id='create_transaction_amount' placeholder='$0.00' required />
+
         <label for='create_transaction_paid'>Paid: </label>
         <select name='create_transaction_paid' id='create_transaction_paid' required>
             <option value="" disabled selected>Select True or False</option>
@@ -107,7 +101,7 @@
     <form class='cuForm' id='update_transction_form' method="POST" action="/transactions/update">
         <label for='update_transaction_id'>Transaction to Update: </label>
         <select name='update_transaction_id' id='update_transaction_id' required>
-            <option value='' disabled selected>Select a Transaction</option>
+            <option value='' disabled selected>Select a Transaction ID</option>
             {{#each transactions}}
             <option value='{{this.transactionID}}' required>
                 {{this.transactionID}}
@@ -148,8 +142,8 @@
         <input type='date' name='update_transaction_date' id='update_transaction_date' />
     
         <label for='update_transaction_amount'>Transaction Amount: </label>
-        <input type='text' name='update_transaction_amount' id='update_transaction_amount' />
-    
+        <input type='text' name='update_transaction_amount' id='update_transaction_amount' placeholder='$0.00' required />
+
         <label for='update_transaction_paid'>Paid: </label>
         <select name='update_transaction_paid' id='update_transaction_paid' required>
             <option value="" disabled selected>Select True or False</option>

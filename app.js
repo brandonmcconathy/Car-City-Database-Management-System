@@ -38,7 +38,10 @@ app.engine('.hbs', engine({
       return number; // fallback if not 10 digits
     },
     formatCurrency: (amount) => {
-        return `$${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        return `$${parseFloat(amount).toLocaleString('en-US', { 
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2 
+        })}`;
     }
   },
 })); // Create instance of handlebars with helper
@@ -51,13 +54,14 @@ app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 // READ ROUTES
 app.get('/', async function (req, res) {
     try {
-        res.render('home'); // Render the home.hbs file
+        const resetSuccess = req.query.resetSuccess === 'true';
+        res.render('home', { resetSuccess });
     } catch (error) {
         console.error('Error rendering page:', error);
-        // Send a generic error message to the browser
         res.status(500).send('An error occurred while rendering the page.');
     }
 });
+
 
 app.get('/customers', async function (req, res) {
     try {
@@ -179,16 +183,16 @@ app.get('/reset', async function (req, res) {
         const query1 = `CALL sp_Reset();`;
         await db.query(query1);
 
-        // Redirect the user to the homepage
-        res.redirect('/');
+        // Redirect with a success message in the URL
+        res.redirect('/?resetSuccess=true');
     } catch (error) {
         console.error('Error executing queries:', error);
-        // Send a generic error message to the browser
         res.status(500).send(
             'An error occurred while executing the database queries.'
         );
     }
 });
+
 
 // CREATE ROUTES
 

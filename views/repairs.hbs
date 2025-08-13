@@ -13,9 +13,6 @@
             <tr>
                 <th>Repair ID</th>
                 <th>Car ID</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Year</th>
                 <th>Employee First Name</th>
                 <th>Employee Last Name</th>
                 <th>Service Date</th>
@@ -32,9 +29,6 @@
             <tr>
                 <td>{{this.repairID}}</td>
                 <td>{{this.carID}}</td>
-                <td>{{this.make}}</td>
-                <td>{{this.model}}</td>
-                <td>{{this.year}}</td>
                 <td>{{this.fName}}</td>
                 <td>{{this.lName}}</td>
                 <td>{{this.serviceDate}}</td>
@@ -86,7 +80,7 @@
         <input type='text' name='create_repair_notes' id='create_repair_notes' required />
     
         <label for='create_repair_cost'>Cost: </label>
-        <input type='number' name='create_repair_cost' id='create_repair_cost' required />
+        <input type='text' name='create_repair_cost' id='create_repair_cost' placeholder='$0.00' required />
     
         <input type='submit' />
     </form>
@@ -136,7 +130,8 @@
         <input type='text' name='update_repair_notes' id='update_repair_notes' />
     
         <label for='update_repair_cost'>Cost: </label>
-        <input type='number' name='update_repair_cost' id='update_repair_cost' />
+        <input type='text' name='update_repair_cost' id='update_repair_cost' placeholder='$0.00' required />
+
     
         <input type='submit' />
     </form>
