@@ -125,7 +125,7 @@ DELIMITER //
 CREATE PROCEDURE sp_CreateRepair(
     IN p_employeeID INT,
     IN p_carID INT, 
-    IN p_serviceDate DATETIME, 
+    IN p_serviceDate DATE_FORMAT(Repairs.serviceDate, '%Y-%m-%d'), 
     IN p_serviceType VARCHAR(100), 
     IN p_notes VARCHAR(255), 
     IN p_cost DECIMAL(10,2), 
